@@ -1,0 +1,8 @@
+torch
+transformers
+pillow
+numpy
+faiss-cpu
+requests
+python-telegram-bot
+datasets

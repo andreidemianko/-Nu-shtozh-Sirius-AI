@@ -5,7 +5,7 @@ from telegram.ext.filters import PHOTO
 from PIL import Image
 from io import BytesIO
 import os
-from vlm_model import generate_clothing_descriptions_and_search
+from dotenv import load_dotenv, dotenv_values
 
 # Настройка логирования
 logging.basicConfig(
@@ -14,7 +14,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-BOT_TOKEN = os.getenv("T7335523574:AAF4ay5tJo0rOXFK869RbyEjJyOd1okG44s")
+BOT_TOKEN = os.getenv("bot_token")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -27,7 +27,8 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE):
         photo_bytes = await photo_file.download_as_bytearray()
         image = Image.open(BytesIO(photo_bytes)).convert('RGB')
 
-        descriptions, similar_images = generate_clothing_descriptions_and_search(image)
+        #descriptions, similar_images = generate_clothing_descriptions_and_search(image)
+        descriptions, similar_images = [None], [None]
 
         response = "Найденные элементы одежды:\n" + "\n".join([f"• {desc}" for desc in descriptions])
         await update.message.reply_text(response)

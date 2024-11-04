@@ -6,3 +6,4 @@ faiss-cpu
 requests
 python-telegram-bot
 datasets
+python-dotenv
